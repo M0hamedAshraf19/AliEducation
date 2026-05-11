@@ -1,0 +1,38 @@
+body {
+	font-size: 3rem;
+	font-family: Arial, sans-serif;
+}
+input[type="submit"] {
+	font-size: 3rem;
+}
+input[type="text"] {
+	font-size: 3rem;
+}
+input[type="password"] {
+	font-size: 3rem;
+}
+input[type="checkbox"] {
+	width: 2rem;
+	height: 2rem;
+}
+select {
+	font-size: 3rem;
+}
+table {
+	width: 100%;
+	font-size: 3rem;
+	border: 3px solid black;
+}
+th {
+	font-size: 3rem;
+	border: 3px solid black;
+}
+/* th, td {
+	padding: 1rem;
+} */
+/* .right {
+	float: right;
+}
+.left {
+	float: left;
+} */
