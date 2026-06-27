@@ -1,11 +1,40 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Math</title>
-<link type="text/css" rel="stylesheet" href="..\..\Style.css">
-<link type="image/x-icon" rel="icon" href="..\..\favicon.ico">
-<link rel="manifest" href="..\..\manifest.json">
-</head>
-<body>
-<p>Under Construction</p>
-</body>
+    <head>
+        <title>Math Test</title>
+        <meta charset=UTF-8>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link type="text/css" rel="stylesheet" href="..\..\Style.css">
+        <link type="image/x-icon" rel="icon" href="..\..\favicon.ico">
+        <link rel="manifest" href="..\..\manifest.json">
+    </head>
+    <body>
+        <div id="ChooseOP">
+            <h1>You Have to choose</h1>
+            <form method='post'>
+                <input type='checkbox' name='OPs[]' value='+'>+<br>
+                <input type='checkbox' name='OPs[]' value='-'>-&nbsp;<br>
+                <input type='checkbox' name='OPs[]' value='×'>×<br>
+                <input type='submit' disabled name = 'OPsChoosen' value='Ok'/>
+            </form>
+        </div><br><br>
+
+
+
+        <a href="../index.html">
+            <button>Main</button>
+        </a>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.querySelector("input[type='submit']").disabled = false
+
+                document.querySelector("form").addEventListener("submit", function(e) {
+                    if (document.querySelector("#answer").value.trim() === "") {
+                        e.preventDefault()
+                    }
+                })
+            })
+        </script>
+    </body>
 </html>

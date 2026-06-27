@@ -39,9 +39,14 @@ p.Video {
     margin-bottom: 20px;
 }
 
+input[type="checkbox"] {
+	width: 32px;
+	height: 32px;
+}
 
-
-
+input[type="submit"] {
+	font-size: 35px;
+}
 /* button {
     background: none;
     border: none;
