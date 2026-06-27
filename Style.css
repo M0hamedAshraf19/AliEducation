@@ -1,56 +1,93 @@
 body {
-	font-size: 3rem;
-	text-align: center;
-	font-family: Arial, sans-serif;
-	background-color: #00fff2;
+    font-size: 48px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #00fff2;
+}
+
+h1 {
+    font-size: 110px;
+    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 button {
-	background: none;
-	border: none;
-	transition: transform 0.1s;
+    font-size: 48px;
+    background-color: #1052e1;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.Video {
+    font-weight: bold;
+}
+
+p.Video {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    border: 10px solid black;
+    padding: 25px;
+}
+
+.Video iframe {
+    margin-bottom: 20px;
+}
+
+
+
+
+/* button {
+    background: none;
+    border: none;
+    transition: transform 0.1s;
 }
 
 input[type="submit"] {
-	font-size: 3rem;
+    font-size: 3rem;
 }
 
 input[type="text"] {
-	font-size: 3rem;
+    font-size: 3rem;
 }
 
 input[type="password"] {
-	font-size: 3rem;
+    font-size: 3rem;
 }
 
 input[type="checkbox"] {
-	width: 2rem;
-	height: 2rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 select {
-	font-size: 3rem;
+    font-size: 3rem;
 }
 
 table {
-	width: 100%;
-	font-size: 3rem;
-	border: 3px solid black;
+    width: 100%;
+    font-size: 3rem;
+    border: 3px solid black;
 }
 
 th {
-	font-size: 3rem;
-	border: 3px solid black;
+    font-size: 3rem;
+    border: 3px solid black;
 }
 
 /* th, td {
-	padding: 1rem;
+    padding: 1rem;
 } */
 
 /* .right {
-	float: right;
+    float: right;
 }
 
 .left {
-	float: left;
+    float: left;
 } */
