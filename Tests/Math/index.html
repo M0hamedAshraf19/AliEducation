@@ -6,10 +6,11 @@
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link type="text/css" rel="stylesheet" href="..\..\Style.css">
         <link type="image/x-icon" rel="icon" href="..\..\favicon.ico">
+        <script src="script.js"></script>
         <link rel="manifest" href="..\..\manifest.json">
     </head>
     <body>
-        <div id="ChooseOP">
+        <div style="display: none;" id="ChooseOP">
             <h1>You Have to choose</h1>
             <form method='post'>
                 <input type='checkbox' name='OPs[]' value='+'>+<br>
@@ -24,17 +25,5 @@
         <a href="../index.html">
             <button>Main</button>
         </a>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                document.querySelector("input[type='submit']").disabled = false
-
-                document.querySelector("form").addEventListener("submit", function(e) {
-                    if (document.querySelector("#answer").value.trim() === "") {
-                        e.preventDefault()
-                    }
-                })
-            })
-        </script>
     </body>
 </html>
