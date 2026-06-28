@@ -1,4 +1,5 @@
 function deleteCookies() {
+    if (!document.cookie) return
     const cookies = (document.cookie.split('; '))
     cookies.forEach(function(cookie) {
         document.cookie = `${cookie.split('=')[0]}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
@@ -32,7 +33,7 @@ if (getCookie('questions') === null || getCookie('correct') === null) {
     setCookie('questions', '0')
     setCookie('correct', '0')
 } else {
-
+    console.log("")
 }
 
 let el = ''
@@ -74,43 +75,47 @@ if (getCookie('OPs') === null) {
     } else {
         el = document.querySelector('#questionForm')
         el.style.display = ''
+        let OP = JSON.parse(getCookie('OPs'))[Math.floor(Math.random() * JSON.parse(getCookie('OPs')).length)]
+        console.log(`OP: ${OP}`)
+        let num0 = 0
+        let num1 = 0
+        if (OP === '+') {
+            num0 = Math.floor(Math.random() * 10)
+            if (num0 === 0) {
+                num1 = Math.floor(Math.random() * 10)
+            } else {
+                num1 = Math.floor(Math.random() * (11-num0))
+            }
+        } else if (OP === '-') {
+            num0 = Math.floor(Math.random() * 10)
+            num1 = Math.floor(Math.random() * (num0+1))
+        } else {
+            let multiplyNum0 = parseInt(getCookie('multiplyNum0'))
+            let multiplyNum1 = parseInt(getCookie('multiplyNum1'))
+            num0 = multiplyNum0
+            num1 = multiplyNum1
+            if (multiplyNum1 < 9) {
+                multiplyNum1 += 1
+            } else {
+                multiplyNum1 = 0
+                if (multiplyNum0 < parseInt(getCookie('multiplyEnd'))) {
+                    multiplyNum0 += 1
+                } else {
+                    multiplyNum0 = parseInt(getCookie('multiplyBegin'))
+                }
+            }
+            setCookie('multiplyNum0',String(multiplyNum0))
+            setCookie('multiplyNum1',String(multiplyNum1))
+        }
+        el.querySelector('#question').textContent = `${num0} ${OP} ${num1}`
         finish()
+        el.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault()
+            setCookie('answer',JSON.stringify([num0, OP, num1]))
+            location.reload()
+        })
     }
 }
-
-// let div = document.querySelector("#chooseOP")
-// console.log(div)
-// if (div.style.display === "none") {
-//     console.log("hidden")
-// } else {
-//     console.log("visible")
-// }
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     document.querySelector("input[type='submit']").disabled = false
-
-//     document.querySelector("form").addEventListener("submit", function(e) {
-//         // if (document.querySelector("#answer").value.trim() === "") {
-//         //     e.preventDefault()
-//         // }
-
-//         e.preventDefault()
-
-//         let checked = document.querySelectorAll("input[type='checkbox']:checked")
-        
-//         let selectedOPs = []
-//         checked.forEach(function(checkbox) {
-//             selectedOPs.push(checkbox.value)
-//         })
-
-//         if (selectedOPs.length === 0) {
-//             alert("You Have to choose")
-//             return
-//         }
-
-//         console.log(selectedOPs)
-//     })
-// })
 
 function finish() {
     document.querySelectorAll("input[type='submit']").forEach(function(button) {

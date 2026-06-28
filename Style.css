@@ -60,6 +60,13 @@ p.Video {
     margin-bottom: 20px;
 }
 
+#question {
+    font-size: 90px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+
 /* button {
     background: none;
     border: none;
