@@ -1,25 +1,33 @@
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector("input[type='submit']").disabled = false
+let div = document.querySelector("#chooseOP")
+console.log(div)
+if (div.style.display === "none") {
+    console.log("hidden")
+} else {
+    console.log("visible")
+}
 
-    document.querySelector("form").addEventListener("submit", function(e) {
-        // if (document.querySelector("#answer").value.trim() === "") {
-        //     e.preventDefault()
-        // }
+// document.addEventListener("DOMContentLoaded", function() {
+//     document.querySelector("input[type='submit']").disabled = false
 
-        e.preventDefault()
+//     document.querySelector("form").addEventListener("submit", function(e) {
+//         // if (document.querySelector("#answer").value.trim() === "") {
+//         //     e.preventDefault()
+//         // }
 
-        let checked = document.querySelectorAll("input[type='checkbox']:checked")
+//         e.preventDefault()
+
+//         let checked = document.querySelectorAll("input[type='checkbox']:checked")
         
-        let selectedOPs = []
-        checked.forEach(function(checkbox) {
-            selectedOPs.push(checkbox.value)
-        })
+//         let selectedOPs = []
+//         checked.forEach(function(checkbox) {
+//             selectedOPs.push(checkbox.value)
+//         })
 
-        if (selectedOPs.length === 0) {
-            alert("You Have to choose")
-            return
-        }
+//         if (selectedOPs.length === 0) {
+//             alert("You Have to choose")
+//             return
+//         }
 
-        console.log(selectedOPs)
-    })
-})
+//         console.log(selectedOPs)
+//     })
+// })
