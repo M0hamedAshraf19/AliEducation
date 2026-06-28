@@ -4,26 +4,67 @@
         <title>Math Test</title>
         <meta charset=UTF-8>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <link type="text/css" rel="stylesheet" href="..\..\Style.css">
-        <link type="image/x-icon" rel="icon" href="..\..\favicon.ico">
-        <link rel="manifest" href="..\..\manifest.json">
+        <link type='text/css' rel='stylesheet' href='..\..\Style.css'>
+        <link type='image/x-icon' rel='icon' href='..\..\favicon.ico'>
+        <link rel='manifest' href='..\..\manifest.json'>
     </head>
     <body>
-        <div style="display: none;" id="chooseOP">
-            <h1>You Have to choose</h1>
+        <div style='display: none;' id='score'></div>
+
+        </div>
+
+        <div style='display: none;' id='chooseOP'>
+            You Have to choose<br>
             <form method='post'>
                 <input type='checkbox' name='OPs[]' value='+'>+<br>
                 <input type='checkbox' name='OPs[]' value='-'>-&nbsp;<br>
-                <input type='checkbox' name='OPs[]' value='×'>×<br>
+                <input type='checkbox' name='OPs[]' value='×'>×<br><br>
                 <input type='submit' disabled name = 'OPsChoosen' value='Ok'/>
             </form>
-        </div><br><br>
+        </div>
 
+        <div style='display: none;' id='setMultiplication'>
+            <form method='post'>
+                Start multiplication from<br>
+                <select name=multiplyBegin>
+                    <option value='1' selected>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                    <option value='6'>6</option>
+                    <option value='7'>7</option>
+                    <option value='8'>8</option>
+                    <option value='9'>9</option>
+                </select><br>
+                End it at<br>
+                <select name=multiplyEnd>
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                    <option value='6'>6</option>
+                    <option value='7'>7</option>
+                    <option value='8'>8</option>
+                    <option value='9' selected>9</option>
+                </select><br><br>
+                <input type='submit' disabled name = 'Answered' value='Ok'/>
+            </form>
+        </div>
+
+        <div style='display: none;' id = 'questionForm'>
+            <p id='question'>foo</p>
+            <form method='post'>
+                <input type='text' name='answer' size='5' autocomplete='off' id =answer>
+            </form>
+        </div>
 
         
-        <a href="../index.html">
+        <br><br><a href='../index.html'>
             <button>Main</button>
         </a>
-        <script src="script.js"></script>
+
+        <script src='script.js'></script>
     </body>
 </html>

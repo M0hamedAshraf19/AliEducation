@@ -39,33 +39,47 @@ p.Video {
     margin-bottom: 20px;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
 	width: 32px;
 	height: 32px;
 }
 
-input[type="submit"] {
+input[type='submit'] {
 	font-size: 35px;
 }
+
+select {
+	font-size: 48px;
+}
+
+input[type="text"] {
+	font-size: 48px;
+}
+input[type="password"] {
+	font-size: 48px;
+}
+
+
+
 /* button {
     background: none;
     border: none;
     transition: transform 0.1s;
 }
 
-input[type="submit"] {
+input[type='submit'] {
     font-size: 3rem;
 }
 
-input[type="text"] {
+input[type='text'] {
     font-size: 3rem;
 }
 
-input[type="password"] {
+input[type='password'] {
     font-size: 3rem;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
     width: 2rem;
     height: 2rem;
 }
