@@ -1,10 +1,14 @@
-let div = document.querySelector("#chooseOP")
-console.log(div)
-if (div.style.display === "none") {
-    console.log("hidden")
-} else {
-    console.log("visible")
-}
+let cookies = document.cookie.split("; ")
+
+
+
+// let div = document.querySelector("#chooseOP")
+// console.log(div)
+// if (div.style.display === "none") {
+//     console.log("hidden")
+// } else {
+//     console.log("visible")
+// }
 
 // document.addEventListener("DOMContentLoaded", function() {
 //     document.querySelector("input[type='submit']").disabled = false
