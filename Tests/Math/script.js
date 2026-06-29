@@ -136,6 +136,7 @@ if (getCookie('OPs') === null) {
                 setCookie('question',`${num0}${OP}${num1}`)
                 setCookie('answer', answer)
                 location.reload()
+                return
             } else {
                 alert('You have to write')
             }
