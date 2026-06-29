@@ -5,7 +5,14 @@ function deleteCookies() {
         document.cookie = `${cookie.split('=')[0]}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
     });
 }
-// deleteCookies()
+
+document.querySelector('#reset').addEventListener('click', function() {
+    deleteCookies()
+    document.querySelectorAll("input[type='checkbox']").forEach(function(checkbox) {
+        checkbox.checked = false
+    })
+    location.reload()
+})
 
 function browseCookies() {
     const cookies = (document.cookie.split('; '))
@@ -13,7 +20,6 @@ function browseCookies() {
         console.log(cookie)
     });
 }
-// browseCookies()
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
@@ -32,9 +38,23 @@ if (getCookie('questions') === null || getCookie('correct') === null) {
     deleteCookies()
     setCookie('questions', '0')
     setCookie('correct', '0')
-} else {
-    console.log("")
+} else{
+    if (!(getCookie('answer') === null)) {
+        setCookie('questions',String(parseInt(getCookie('questions'))+1))
+        if (getCookie('answer') == eval(getCookie('question').replace('×', '*')))
+        {
+            setCookie('correct',String(parseInt(getCookie('correct'))+1))
+        }
+        document.cookie = `question=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
+        document.cookie = `answer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
+        //location.reload()
+    }
 }
+
+document.querySelector('#score').innerHTML = `
+    Questions: ${getCookie('questions')}<br>Correct: ${getCookie('correct')}
+`
+document.querySelector('#score').style.display = ''
 
 let el = ''
 
@@ -50,7 +70,7 @@ if (getCookie('OPs') === null) {
             selectedOPs.push(checkbox.value)
         })
         if (selectedOPs.length === 0) {
-            alert('You Have to choose')
+            alert('You have to choose')
             return
         }
         console.log(selectedOPs)
@@ -111,8 +131,14 @@ if (getCookie('OPs') === null) {
         finish()
         el.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault()
-            setCookie('answer',JSON.stringify([num0, OP, num1]))
-            location.reload()
+            let answer = (el.querySelector("input[type='text']").value).trim()
+            if (answer) {
+                setCookie('question',`${num0}${OP}${num1}`)
+                setCookie('answer', answer)
+                location.reload()
+            } else {
+                alert('You have to write')
+            }
         })
     }
 }

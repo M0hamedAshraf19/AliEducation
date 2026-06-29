@@ -9,12 +9,10 @@
         <link rel='manifest' href='..\..\manifest.json'>
     </head>
     <body>
-        <div style='display: none;' id='score'>
-
-        </div>
+        <div style='display: none;' id='score'></div>
 
         <div style='display: none;' id='chooseOP'>
-            You Have to choose<br>
+            <b>Choose the operation(s)</b><br>
             <form method='post'>
                 <input type='checkbox' name='OPs[]' value='+'>+<br>
                 <input type='checkbox' name='OPs[]' value='-'>-&nbsp;<br>
@@ -25,7 +23,7 @@
 
         <div style='display: none;' id='setMultiplication'>
             <form method='post'>
-                Start multiplication from<br>
+                <b>Start multiplication from</b><br>
                 <select name=multiplyBegin>
                     <option value='1' selected>1</option>
                     <option value='2'>2</option>
@@ -37,7 +35,7 @@
                     <option value='8'>8</option>
                     <option value='9'>9</option>
                 </select><br>
-                End it at<br>
+                <b>End it at</b><br>
                 <select name=multiplyEnd>
                     <option value='1'>1</option>
                     <option value='2'>2</option>
@@ -62,9 +60,9 @@
         </div>
 
 
-        <br><br><a href='../index.html'>
-            <button>Main</button>
-        </a>
+        <br><br><a href='../index.html'><button>Main</button></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id='reset'>Reset</button>
 
         <script src='script.js'></script>
     </body>
