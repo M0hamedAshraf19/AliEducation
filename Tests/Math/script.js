@@ -2,7 +2,7 @@ function deleteCookies() {
     if (!document.cookie) return
     const cookies = (document.cookie.split('; '))
     cookies.forEach(function(cookie) {
-        document.cookie = `${cookie.split('=')[0]}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
+        document.cookie = `${cookie.split('=')[0]}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
     });
 }
 
@@ -28,9 +28,9 @@ function getCookie(name) {
 
 function setCookie(name, value, expires = null) {
     if (expires) {
-        document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/`
+        document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=${window.location.pathname}`
     } else {
-        document.cookie = `${name}=${value}; path=/`
+        document.cookie = `${name}=${value}; path=${window.location.pathname}`
     }
 }
 
@@ -136,7 +136,6 @@ if (getCookie('OPs') === null) {
                 setCookie('question',`${num0}${OP}${num1}`)
                 setCookie('answer', answer)
                 location.reload()
-                return
             } else {
                 alert('You have to write')
             }
