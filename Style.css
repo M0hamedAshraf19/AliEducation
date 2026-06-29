@@ -5,6 +5,10 @@ body {
     background-color: #00fff2;
 }
 
+div {
+    display: none;
+}
+
 h1 {
     font-size: 110px;
     margin-top: 10px;
@@ -67,6 +71,16 @@ p.Video {
     margin-bottom: 60px;
 }
 
+#score {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    text-align: left;
+    font-weight: bold;
+    border: 6px solid blue;
+    padding: 5px;
+    /* color: blue; */
+}
 
 /* button {
     background: none;

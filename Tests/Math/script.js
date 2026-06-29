@@ -54,13 +54,13 @@ if (getCookie('questions') === null || getCookie('correct') === null) {
 document.querySelector('#score').innerHTML = `
     Questions: ${getCookie('questions')}<br>Correct: ${getCookie('correct')}
 `
-document.querySelector('#score').style.display = ''
+document.querySelector('#score').style.display = 'block'
 
 let el = ''
 
 if (getCookie('OPs') === null) {
     el = document.querySelector('#chooseOP')
-    el.style.display = ''
+    el.style.display = 'block'
     finish()
     el.querySelector('form').addEventListener('submit', function(e) {
         e.preventDefault()
@@ -80,7 +80,7 @@ if (getCookie('OPs') === null) {
 } else {
     if (JSON.parse(getCookie('OPs')).includes('×') && (getCookie('multiplyBegin') === null || getCookie('multiplyEnd') === null)) {
         el = document.querySelector('#setMultiplication')
-        el.style.display = ''
+        el.style.display = 'block'
         finish()
         el.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault()
@@ -94,7 +94,7 @@ if (getCookie('OPs') === null) {
         })
     } else {
         el = document.querySelector('#questionForm')
-        el.style.display = ''
+        el.style.display = 'block'
         let OP = JSON.parse(getCookie('OPs'))[Math.floor(Math.random() * JSON.parse(getCookie('OPs')).length)]
         console.log(`OP: ${OP}`)
         let num0 = 0
