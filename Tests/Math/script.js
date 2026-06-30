@@ -1,29 +1,27 @@
 function deleteCookies() {
     if (!document.cookie) return
-    const cookies = (document.cookie.split('; '))
-    cookies.forEach(function(cookie) {
+    document.cookie.split('; ').forEach(function(cookie) {
         document.cookie = `${cookie.split('=')[0]}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
     });
 }
 
 document.querySelector('#reset').addEventListener('click', function() {
     deleteCookies()
-    document.querySelectorAll("input[type='checkbox']").forEach(function(checkbox) {
-        checkbox.checked = false
+    document.querySelectorAll("form").forEach(function(form) {
+        form.reset()
     })
     location.reload()
 })
 
 function browseCookies() {
-    const cookies = (document.cookie.split('; '))
-    cookies.forEach(function(cookie) {
+    document.cookie.split('; ').forEach(function(cookie) {
         console.log(cookie)
     });
 }
 
 function getCookie(name) {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
-    return match ? match[2] : null;
+    const cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+    return cookie ? cookie[2] : null;
 }
 
 function setCookie(name, value, expires = null) {
@@ -38,17 +36,32 @@ if (getCookie('questions') === null || getCookie('correct') === null) {
     deleteCookies()
     setCookie('questions', '0')
     setCookie('correct', '0')
-} else{
-    if (!(getCookie('answer') === null)) {
-        setCookie('questions',String(parseInt(getCookie('questions'))+1))
-        if (getCookie('answer') == eval(getCookie('question').replace('×', '*')))
-        {
-            setCookie('correct',String(parseInt(getCookie('correct'))+1))
-        }
-        document.cookie = `question=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
-        document.cookie = `answer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
-        //location.reload()
+} else if (!(getCookie('answer') === null)) {
+    setCookie('questions',String(parseInt(getCookie('questions'))+1))
+    if (getCookie('answer') == eval(getCookie('question').replace('×', '*')))
+    {
+        setCookie('correct',String(parseInt(getCookie('correct'))+1))
     }
+    if (getCookie('question').indexOf('×') >= 0) {
+        let multiplyNum0 = parseInt(getCookie('multiplyNum0'))
+        let multiplyNum1 = parseInt(getCookie('multiplyNum1'))
+        if (multiplyNum1 < 9) {
+            multiplyNum1 += 1
+        } else {
+            multiplyNum1 = 0
+            if (multiplyNum0 < parseInt(getCookie('multiplyEnd'))) {
+                multiplyNum0 += 1
+            } else {
+                multiplyNum0 = parseInt(getCookie('multiplyBegin'))
+            }
+        }
+        setCookie('multiplyNum0',String(multiplyNum0))
+        setCookie('multiplyNum1',String(multiplyNum1))
+    }
+    document.cookie = `question=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
+    document.cookie = `answer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
+    document.cookie = `num0=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
+    document.cookie = `num1=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
 }
 
 document.querySelector('#score').innerHTML = `
@@ -73,7 +86,6 @@ if (getCookie('OPs') === null) {
             alert('You have to choose')
             return
         }
-        console.log(selectedOPs)
         setCookie('OPs',JSON.stringify(selectedOPs))
         location.reload()
     })
@@ -95,37 +107,32 @@ if (getCookie('OPs') === null) {
     } else {
         el = document.querySelector('#questionForm')
         el.style.display = 'block'
-        let OP = JSON.parse(getCookie('OPs'))[Math.floor(Math.random() * JSON.parse(getCookie('OPs')).length)]
-        console.log(`OP: ${OP}`)
+        let OP = ''
         let num0 = 0
         let num1 = 0
-        if (OP === '+') {
-            num0 = Math.floor(Math.random() * 10)
-            if (num0 === 0) {
-                num1 = Math.floor(Math.random() * 10)
-            } else {
-                num1 = Math.floor(Math.random() * (11-num0))
-            }
-        } else if (OP === '-') {
-            num0 = Math.floor(Math.random() * 10)
-            num1 = Math.floor(Math.random() * (num0+1))
-        } else {
-            let multiplyNum0 = parseInt(getCookie('multiplyNum0'))
-            let multiplyNum1 = parseInt(getCookie('multiplyNum1'))
-            num0 = multiplyNum0
-            num1 = multiplyNum1
-            if (multiplyNum1 < 9) {
-                multiplyNum1 += 1
-            } else {
-                multiplyNum1 = 0
-                if (multiplyNum0 < parseInt(getCookie('multiplyEnd'))) {
-                    multiplyNum0 += 1
+        if (getCookie('OP') === null || getCookie('num0') === null || getCookie('num1') === null) {
+            OP = JSON.parse(getCookie('OPs'))[Math.floor(Math.random() * JSON.parse(getCookie('OPs')).length)]
+            if (OP === '+') {
+                num0 = Math.floor(Math.random() * 10)
+                if (num0 === 0) {
+                    num1 = Math.floor(Math.random() * 10)
                 } else {
-                    multiplyNum0 = parseInt(getCookie('multiplyBegin'))
+                    num1 = Math.floor(Math.random() * (11-num0))
                 }
+            } else if (OP === '-') {
+                num0 = Math.floor(Math.random() * 10)
+                num1 = Math.floor(Math.random() * (num0+1))
+            } else {
+                num0 = parseInt(getCookie('multiplyNum0'))
+                num1 = parseInt(getCookie('multiplyNum1'))
             }
-            setCookie('multiplyNum0',String(multiplyNum0))
-            setCookie('multiplyNum1',String(multiplyNum1))
+            setCookie('OP',OP)
+            setCookie('num0',String(num0))
+            setCookie('num1',String(num1))
+        } else {
+            OP = getCookie('OP')
+            num0 = getCookie('num0')
+            num1 = getCookie('num1')
         }
         el.querySelector('#question').textContent = `${num0} ${OP} ${num1}`
         finish()
