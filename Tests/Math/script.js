@@ -34,13 +34,13 @@ function setCookie(name, value, expires = null) {
 
 if (getCookie('questions') === null || getCookie('correct') === null) {
     deleteCookies()
-    setCookie('questions', '0')
-    setCookie('correct', '0')
+    setCookie('questions', 0)
+    setCookie('correct', 0)
 } else if (!(getCookie('answer') === null)) {
-    setCookie('questions',String(parseInt(getCookie('questions'))+1))
+    setCookie('questions',parseInt(getCookie('questions'))+1)
     if (getCookie('answer') == eval(getCookie('question').replace('×', '*')))
     {
-        setCookie('correct',String(parseInt(getCookie('correct'))+1))
+        setCookie('correct',parseInt(getCookie('correct'))+1)
     }
     if (getCookie('question').indexOf('×') >= 0) {
         let multiplyNum0 = parseInt(getCookie('multiplyNum0'))
@@ -55,8 +55,8 @@ if (getCookie('questions') === null || getCookie('correct') === null) {
                 multiplyNum0 = parseInt(getCookie('multiplyBegin'))
             }
         }
-        setCookie('multiplyNum0',String(multiplyNum0))
-        setCookie('multiplyNum1',String(multiplyNum1))
+        setCookie('multiplyNum0',multiplyNum0)
+        setCookie('multiplyNum1',multiplyNum1)
     }
     document.cookie = `question=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
     document.cookie = `answer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
@@ -101,7 +101,7 @@ if (getCookie('OPs') === null) {
             setCookie('multiplyBegin',multiplyBegin)
             setCookie('multiplyEnd',multiplyEnd)
             setCookie('multiplyNum0',multiplyBegin)
-            setCookie('multiplyNum1','0')
+            setCookie('multiplyNum1',0)
             location.reload()
         })
     } else {
@@ -127,8 +127,8 @@ if (getCookie('OPs') === null) {
                 num1 = parseInt(getCookie('multiplyNum1'))
             }
             setCookie('OP',OP)
-            setCookie('num0',String(num0))
-            setCookie('num1',String(num1))
+            setCookie('num0',num0)
+            setCookie('num1',num1)
         } else {
             OP = getCookie('OP')
             num0 = getCookie('num0')
