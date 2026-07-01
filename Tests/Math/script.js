@@ -1,24 +1,3 @@
-function deleteCookies() {
-    if (!document.cookie) return
-    document.cookie.split('; ').forEach(function(cookie) {
-        document.cookie = `${cookie.split('=')[0]}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
-    });
-}
-
-document.querySelector('#reset').addEventListener('click', function() {
-    deleteCookies()
-    document.querySelectorAll("form").forEach(function(form) {
-        form.reset()
-    })
-    location.reload()
-})
-
-function browseCookies() {
-    document.cookie.split('; ').forEach(function(cookie) {
-        console.log(cookie)
-    });
-}
-
 function getCookie(name) {
     const cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
     return cookie ? cookie[2] : null;
@@ -32,15 +11,36 @@ function setCookie(name, value, expires = null) {
     }
 }
 
+function browseCookies() {
+    document.cookie.split('; ').forEach(function(cookie) {
+        console.log(cookie)
+    });
+}
+
+function deleteCookies() {
+    if (!document.cookie) return
+    document.cookie.split('; ').forEach(function(cookie) {
+        setCookie(cookie.split('=')[0], '', new Date(0))
+    });
+}
+
+document.querySelector('#reset').addEventListener('click', function() {
+    deleteCookies()
+    document.querySelectorAll("form").forEach(function(form) {
+        form.reset()
+    })
+    location.reload()
+})
+
 if (getCookie('questions') === null || getCookie('correct') === null) {
     deleteCookies()
     setCookie('questions', 0)
     setCookie('correct', 0)
-} else if (!(getCookie('answer') === null)) {
-    setCookie('questions',parseInt(getCookie('questions'))+1)
+} else if (getCookie('answer') !== null) {
+    setCookie('questions', parseInt(getCookie('questions'))+1)
     if (getCookie('answer') == eval(getCookie('question').replace('×', '*')))
     {
-        setCookie('correct',parseInt(getCookie('correct'))+1)
+        setCookie('correct', parseInt(getCookie('correct'))+1)
     }
     if (getCookie('question').indexOf('×') >= 0) {
         let multiplyNum0 = parseInt(getCookie('multiplyNum0'))
@@ -55,13 +55,13 @@ if (getCookie('questions') === null || getCookie('correct') === null) {
                 multiplyNum0 = parseInt(getCookie('multiplyBegin'))
             }
         }
-        setCookie('multiplyNum0',multiplyNum0)
-        setCookie('multiplyNum1',multiplyNum1)
+        setCookie('multiplyNum0', multiplyNum0)
+        setCookie('multiplyNum1', multiplyNum1)
     }
-    document.cookie = `question=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
-    document.cookie = `answer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
-    document.cookie = `num0=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
-    document.cookie = `num1=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${window.location.pathname}`
+    setCookie('question', '', new Date(0))
+    setCookie('answer', '', new Date(0))
+    setCookie('num0', '', new Date(0))
+    setCookie('num1', '', new Date(0))
 }
 
 document.querySelector('#score').innerHTML = `
@@ -74,7 +74,6 @@ let el = ''
 if (getCookie('OPs') === null) {
     el = document.querySelector('#chooseOP')
     el.style.display = 'block'
-    finish()
     el.querySelector('form').addEventListener('submit', function(e) {
         e.preventDefault()
         let checked = el.querySelectorAll("input[type='checkbox']:checked")
@@ -86,22 +85,21 @@ if (getCookie('OPs') === null) {
             alert('You have to choose')
             return
         }
-        setCookie('OPs',JSON.stringify(selectedOPs))
+        setCookie('OPs', JSON.stringify(selectedOPs))
         location.reload()
     })
 } else {
     if (JSON.parse(getCookie('OPs')).includes('×') && (getCookie('multiplyBegin') === null || getCookie('multiplyEnd') === null)) {
         el = document.querySelector('#setMultiplication')
         el.style.display = 'block'
-        finish()
         el.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault()
             let multiplyBegin = el.querySelector("select[name='multiplyBegin']").value
             let multiplyEnd = el.querySelector("select[name='multiplyEnd']").value
-            setCookie('multiplyBegin',multiplyBegin)
-            setCookie('multiplyEnd',multiplyEnd)
-            setCookie('multiplyNum0',multiplyBegin)
-            setCookie('multiplyNum1',0)
+            setCookie('multiplyBegin', multiplyBegin)
+            setCookie('multiplyEnd', multiplyEnd)
+            setCookie('multiplyNum0', multiplyBegin)
+            setCookie('multiplyNum1', 0)
             location.reload()
         })
     } else {
@@ -126,21 +124,20 @@ if (getCookie('OPs') === null) {
                 num0 = parseInt(getCookie('multiplyNum0'))
                 num1 = parseInt(getCookie('multiplyNum1'))
             }
-            setCookie('OP',OP)
-            setCookie('num0',num0)
-            setCookie('num1',num1)
+            setCookie('OP', OP)
+            setCookie('num0', num0)
+            setCookie('num1', num1)
         } else {
             OP = getCookie('OP')
             num0 = getCookie('num0')
             num1 = getCookie('num1')
         }
         el.querySelector('#question').textContent = `${num0} ${OP} ${num1}`
-        finish()
         el.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault()
             let answer = (el.querySelector("input[type='text']").value).trim()
             if (answer) {
-                setCookie('question',`${num0}${OP}${num1}`)
+                setCookie('question', `${num0}${OP}${num1}`)
                 setCookie('answer', answer)
                 location.reload()
             } else {
@@ -150,8 +147,6 @@ if (getCookie('OPs') === null) {
     }
 }
 
-function finish() {
-    document.querySelectorAll("input[type='submit']").forEach(function(button) {
-        button.disabled = false
-    })
-}
+document.querySelectorAll("input[type='submit']").forEach(function(button) {
+    button.disabled = false
+})
