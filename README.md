@@ -1,2 +1,2 @@
-Private Repo
-Link: https://m0hamedashraf19.github.io/AliEducation/
+This is a private repo  
+Here is the [link](https://m0hamedashraf19.github.io/AliEducation/)
